@@ -91,7 +91,7 @@ RUN cd mongodb-src-r3.2.12 \
  && scons mongo --wiredtiger=off --mmapv1=on --disable-warnings-as-errors
 ```
 
-### 
+### Newer versions of glibc stopped including sys/sysmacros.h automatically with sys/type.h
 
 ```
 g++ -o build/opt/mongo/db/storage/mmap_v1/mmap_v1_engine.o -c -Wnon-virtual-dtor -Woverloaded-virtual -Wno-maybe-uninitialized -std=c++11 -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -ggdb -pthread -Wall -Wsign-compare -Wno-unknown-pragmas -Winvalid-pch -O2 -Wno-unused-local-typedefs -Wno-unused-function -Wno-deprecated-declarations -Wno-unused-const-variable -Wno-unused-but-set-variable -Wno-missing-braces -fno-builtin-memcmp -DPCRE_STATIC -DNDEBUG -D_FILE_OFFSET_BITS=64 -DBOOST_THREAD_VERSION=4 -DBOOST_THREAD_DONT_PROVIDE_VARIADIC_THREAD -DBOOST_SYSTEM_NO_DEPRECATED -DBOOST_THREAD_DONT_PROVIDE_INTERRUPTIONS -DBOOST_THREAD_HAS_NO_EINTR_BUG -Isrc/third_party/asio-asio-1-11-0/asio/include -Isrc/third_party/s2 -Isrc/third_party/pcre-8.39 -Isrc/third_party/boost-1.56.0 -Ibuild/opt -Isrc src/mongo/db/storage/mmap_v1/mmap_v1_engine.cpp
