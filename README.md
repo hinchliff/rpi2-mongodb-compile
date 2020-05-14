@@ -4,8 +4,10 @@ The Raspbian repositories only provide an older version of MongoDB (2.4.14).
 
 ## cross-compile
 
-The container can be built on x86 with normal docker build commands:
+The container can be built on x86 with normal docker build commands, after prepareing QEMU
 ```
+docker run --rm --privileged multiarch/qemu-user-static:register --reset
+
 docker build -t rpi2-mongodb-compile:3.2.22 .
 ```
 
@@ -122,4 +124,6 @@ RUN sed -i '35i#include <sys/sysmacros.h>' mongodb-src-r3.2.12/src/mongo/db/stor
 * https://koenaerts.ca/compile-and-install-mongodb-on-raspberry-pi/
 * https://github.com/CauldronDevelopmentLLC/cbang/commit/420c236389726635b669c4e40b2dd80f598a037e
 * https://bugzilla.mozilla.org/show_bug.cgi?id=1329798
+* https://github.com/ckulka/docker-multi-arch-example
+* https://hub.docker.com/r/ckulka/multi-arch-example
 
