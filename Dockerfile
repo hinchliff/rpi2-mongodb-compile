@@ -34,8 +34,9 @@ RUN wget https://fastdl.mongodb.org/src/mongodb-src-r${MONGODB_VERSION}.tar.gz \
  && sed -i '193s/(boost::mpl::not_<Pred>::/boost::mpl::not_<Pred>::/' mongodb-src/src/third_party/boost-1.56.0/boost/mpl/assert.hpp \
  && sed -i '195s/)//' mongodb-src/src/third_party/boost-1.56.0/boost/mpl/assert.hpp \
  && sed -i '35i#include <sys/sysmacros.h>' mongodb-src/src/mongo/db/storage/paths.h \
+ && sed -i '1494s/O2/O1/' mongodb-src/SConstruct \
  && cd /mongodb-src \
- && scons mongod mongo mongos --wiredtiger=off --mmapv1=on --disable-warnings-as-errors \
+ && scons mongod mongo mongos --opt=on --wiredtiger=off --mmapv1=on --disable-warnings-as-errors \
  && cd build/opt/mongo \
  && strip -s mongo mongod mongos \
  && cp mongo mongod mongos /usr/local/bin/ \

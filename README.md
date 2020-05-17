@@ -117,6 +117,18 @@ The command '/bin/sh -c cd mongodb-src-r3.2.12  && scons mongo mongod --wiredtig
 RUN sed -i '35i#include <sys/sysmacros.h>' mongodb-src-r3.2.12/src/mongo/db/storage/paths.h
 ```
 
+### MongoDB with `-O2` causes segfault on ARM
+
+```
+root@43262540c0f6:/# mongod
+2020-05-16T12:16:42.564+0000 F -        [main] Invalid access at address: 0
+2020-05-16T12:16:42.644+0000 F -        [main] Got signal: 11 (Segmentation fault).
+```
+
+```
+ && sed -i '1494s/O2/O1/' mongodb-src/SConstruct \
+```
+
 
 ## References
 * https://pimylifeup.com/mongodb-raspberry-pi/
@@ -126,4 +138,5 @@ RUN sed -i '35i#include <sys/sysmacros.h>' mongodb-src-r3.2.12/src/mongo/db/stor
 * https://bugzilla.mozilla.org/show_bug.cgi?id=1329798
 * https://github.com/ckulka/docker-multi-arch-example
 * https://hub.docker.com/r/ckulka/multi-arch-example
+* https://bodhi.fedoraproject.org/updates/FEDORA-2016-ad367c57b0
 
