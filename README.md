@@ -119,16 +119,22 @@ RUN sed -i '35i#include <sys/sysmacros.h>' mongodb-src-r3.2.12/src/mongo/db/stor
 
 ### MongoDB with `-O2` causes segfault on ARM
 
+Any time Mongo is compiled with GCC Optimization, the compiled binary will segfault.
 ```
 root@43262540c0f6:/# mongod
 2020-05-16T12:16:42.564+0000 F -        [main] Invalid access at address: 0
 2020-05-16T12:16:42.644+0000 F -        [main] Got signal: 11 (Segmentation fault).
 ```
 
+Changing from `-O2` to `-O1` didn't help:
 ```
  && sed -i '1494s/O2/O1/' mongodb-src/SConstruct \
 ```
 
+The only thing that I got to work was disabling optimization in the scons script:
+```
+ && scons mongod mongo mongos --opt=off --wiredtiger=off --mmapv1=on --disable-warnings-as-errors \
+```
 
 ## References
 * https://pimylifeup.com/mongodb-raspberry-pi/

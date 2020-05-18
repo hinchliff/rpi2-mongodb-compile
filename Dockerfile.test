@@ -36,9 +36,9 @@ RUN wget https://fastdl.mongodb.org/src/mongodb-src-r${MONGODB_VERSION}.tar.gz \
  && sed -i '35i#include <sys/sysmacros.h>' mongodb-src/src/mongo/db/storage/paths.h \
  && sed -i '1494s/O2/O1/' mongodb-src/SConstruct \
  && cd /mongodb-src \
- && scons mongod mongo mongos --opt=off --wiredtiger=off --mmapv1=on --disable-warnings-as-errors \
+ && scons mongod mongo mongos --opt=off --wiredtiger=off --mmapv1=on --disable-warnings-as-errors
+
+RUN cd /mongodb-src \
  && strip -s mongo mongod mongos \
- && cp mongo mongod mongos /usr/local/bin/ \
- && cd / \
- && rm -rf /mongodb-src
+ && cp mongo mongod mongos /usr/local/bin/
 
