@@ -2,6 +2,11 @@ Raspberry Pi 2 and Raspberry Pi 3 use 32-bit ARM CPUs.  The highest MongoDB vers
 
 The Raspbian repositories only provide an older version of MongoDB (2.4.14).
 
+You can include the mongodb binary that has been compiled from this docker image in other docker images, like I do in [hinchliff/rpi2-unifi-controller](https://github.com/hinchliff/rpi2-unifi-controller):
+```
+COPY --from=hinchliff/rpi2-mongodb-compile /usr/local/bin/mongod /usr/local/bin/
+```
+
 ## cross-compile
 
 The container can be built on x86 with normal docker build commands, after prepareing QEMU
